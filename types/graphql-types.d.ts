@@ -2090,12 +2090,10 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
-  name?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -2198,7 +2196,6 @@ export type SitePageFieldsEnum =
   'internal___type' |
   'isCreatedByStatefulCreatePages' |
   'context___id' |
-  'context___name' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
   'pluginCreator___parent___parent___id' |
@@ -3646,14 +3643,6 @@ export type WpGraphQl_ContentNodeIdTypeEnum =
 
 export type WpGraphQl_ContentRevisionUnion = WpGraphQl_Post | WpGraphQl_Page;
 
-/** The template assigned to a node of content */
-export type WpGraphQl_ContentTemplate = {
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
-
-export type WpGraphQl_ContentTemplateUnion = WpGraphQl_DefaultTemplate | WpGraphQl_Template;
-
 /** An Post Type object */
 export type WpGraphQl_ContentType = WpGraphQl_Node & {
   /** Whether this content type should can be exported. */
@@ -4101,12 +4090,6 @@ export type WpGraphQl_DateQueryInput = {
   year?: Maybe<Scalars['Int']>;
 };
 
-/** The template assigned to the node */
-export type WpGraphQl_DefaultTemplate = WpGraphQl_ContentTemplate & {
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
-
 /** Input for the deleteCategory mutation */
 export type WpGraphQl_DeleteCategoryInput = {
   clientMutationId: Scalars['String'];
@@ -4287,10 +4270,6 @@ export type WpGraphQl_GeneralSettings = {
 export type WpGraphQl_HierarchicalContentNode = {
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
-  /** Database id of the parent object */
-  parentDatabaseId?: Maybe<Scalars['Int']>;
-  /** The globally unique identifier of the parent object. */
-  parentId?: Maybe<Scalars['ID']>;
 };
 
 /** File details for a Media Item */
@@ -4382,10 +4361,6 @@ export type WpGraphQl_MediaItem = WpGraphQl_Node & WpGraphQl_ContentNode & WpGra
   modifiedGmt?: Maybe<Scalars['String']>;
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
-  /** Database id of the parent object */
-  parentDatabaseId?: Maybe<Scalars['Int']>;
-  /** The globally unique identifier of the parent object. */
-  parentId?: Maybe<Scalars['ID']>;
   /** The sizes attribute value for an image. */
   sizes?: Maybe<Scalars['String']>;
   /**
@@ -4403,8 +4378,6 @@ export type WpGraphQl_MediaItem = WpGraphQl_Node & WpGraphQl_ContentNode & WpGra
   srcSet?: Maybe<Scalars['String']>;
   /** The current status of the object */
   status?: Maybe<Scalars['String']>;
-  /** The template assigned to the node */
-  template?: Maybe<WpGraphQl_ContentTemplateUnion>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']>;
   /** URI path for the resource */
@@ -4498,8 +4471,6 @@ export type WpGraphQl_MediaItemSizeEnum =
   'POST_THUMBNAIL' |
   /** MediaItem with the thumbnail size */
   'THUMBNAIL' |
-  /** MediaItem with the twentytwenty-fullscreen size */
-  'TWENTYTWENTY_FULLSCREEN' |
   /** MediaItem with the 1536x1536 size */
   '_1536X1536' |
   /** MediaItem with the 2048x2048 size */
@@ -4741,10 +4712,8 @@ export type WpGraphQl_MenuItemToMenuItemConnectionWhereArgs = {
 
 /** Registered menu locations */
 export type WpGraphQl_MenuLocationEnum = 
-  'EXPANDED' |
   'FOOTER' |
-  'MOBILE' |
-  'PRIMARY' |
+  'MENU_1' |
   'SOCIAL';
 
 /** Connection between the Menu type and the MenuItem type */
@@ -5040,10 +5009,6 @@ export type WpGraphQl_Page = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   pageId: Scalars['Int'];
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
-  /** Database id of the parent object */
-  parentDatabaseId?: Maybe<Scalars['Int']>;
-  /** The globally unique identifier of the parent object. */
-  parentId?: Maybe<Scalars['ID']>;
   /**
    * If the current node is a revision, this field exposes the node this is a
    * revision of. Returns null if the node is not a revision of another node.
@@ -5059,8 +5024,6 @@ export type WpGraphQl_Page = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   slug?: Maybe<Scalars['String']>;
   /** The current status of the object */
   status?: Maybe<Scalars['String']>;
-  /** The template assigned to the node */
-  template?: Maybe<WpGraphQl_ContentTemplateUnion>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']>;
   /** URI path for the resource */
@@ -5462,8 +5425,6 @@ export type WpGraphQl_Post = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   status?: Maybe<Scalars['String']>;
   /** Connection between the post type and the tag type */
   tags?: Maybe<WpGraphQl_PostToTagConnection>;
-  /** The template assigned to the node */
-  template?: Maybe<WpGraphQl_ContentTemplateUnion>;
   /** Terms connected to the object */
   termNames?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Terms connected to the object */
@@ -7682,12 +7643,6 @@ export type WpGraphQl_TaxonomyIdTypeEnum =
   'ID' |
   /** The name of the taxonomy */
   'NAME';
-
-/** The template assigned to the node */
-export type WpGraphQl_Template = WpGraphQl_ContentTemplate & {
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
 
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
 export type WpGraphQl_TermNode = {
