@@ -2090,10 +2090,12 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -2196,6 +2198,7 @@ export type SitePageFieldsEnum =
   'internal___type' |
   'isCreatedByStatefulCreatePages' |
   'context___id' |
+  'context___name' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
   'pluginCreator___parent___parent___id' |
@@ -2238,6 +2241,9 @@ export type SitePageFieldsEnum =
   'pluginCreator___name' |
   'pluginCreator___version' |
   'pluginCreator___pluginOptions___fileName' |
+  'pluginCreator___pluginOptions___typeName' |
+  'pluginCreator___pluginOptions___fieldName' |
+  'pluginCreator___pluginOptions___url' |
   'pluginCreator___pluginOptions___name' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___color' |
@@ -2253,9 +2259,6 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___icons___sizes' |
   'pluginCreator___pluginOptions___icons___type' |
   'pluginCreator___pluginOptions___pathCheck' |
-  'pluginCreator___pluginOptions___typeName' |
-  'pluginCreator___pluginOptions___fieldName' |
-  'pluginCreator___pluginOptions___url' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
   'pluginCreator___ssrAPIs' |
@@ -2443,6 +2446,9 @@ export type SitePluginFieldsEnum =
   'name' |
   'version' |
   'pluginOptions___fileName' |
+  'pluginOptions___typeName' |
+  'pluginOptions___fieldName' |
+  'pluginOptions___url' |
   'pluginOptions___name' |
   'pluginOptions___path' |
   'pluginOptions___color' |
@@ -2458,9 +2464,6 @@ export type SitePluginFieldsEnum =
   'pluginOptions___icons___sizes' |
   'pluginOptions___icons___type' |
   'pluginOptions___pathCheck' |
-  'pluginOptions___typeName' |
-  'pluginOptions___fieldName' |
-  'pluginOptions___url' |
   'nodeAPIs' |
   'browserAPIs' |
   'ssrAPIs' |
@@ -2574,6 +2577,9 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 
 export type SitePluginPluginOptions = {
   fileName?: Maybe<Scalars['String']>;
+  typeName?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   color?: Maybe<Scalars['String']>;
@@ -2586,13 +2592,13 @@ export type SitePluginPluginOptions = {
   icon?: Maybe<Scalars['String']>;
   icons?: Maybe<Array<Maybe<SitePluginPluginOptionsIcons>>>;
   pathCheck?: Maybe<Scalars['Boolean']>;
-  typeName?: Maybe<Scalars['String']>;
-  fieldName?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
   fileName?: Maybe<StringQueryOperatorInput>;
+  typeName?: Maybe<StringQueryOperatorInput>;
+  fieldName?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   color?: Maybe<StringQueryOperatorInput>;
@@ -2605,9 +2611,6 @@ export type SitePluginPluginOptionsFilterInput = {
   icon?: Maybe<StringQueryOperatorInput>;
   icons?: Maybe<SitePluginPluginOptionsIconsFilterListInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
-  typeName?: Maybe<StringQueryOperatorInput>;
-  fieldName?: Maybe<StringQueryOperatorInput>;
-  url?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsIcons = {
@@ -4270,6 +4273,10 @@ export type WpGraphQl_GeneralSettings = {
 export type WpGraphQl_HierarchicalContentNode = {
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
+  /** Database id of the parent object */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /** The globally unique identifier of the parent object. */
+  parentId?: Maybe<Scalars['ID']>;
 };
 
 /** File details for a Media Item */
@@ -4361,6 +4368,10 @@ export type WpGraphQl_MediaItem = WpGraphQl_Node & WpGraphQl_ContentNode & WpGra
   modifiedGmt?: Maybe<Scalars['String']>;
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
+  /** Database id of the parent object */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /** The globally unique identifier of the parent object. */
+  parentId?: Maybe<Scalars['ID']>;
   /** The sizes attribute value for an image. */
   sizes?: Maybe<Scalars['String']>;
   /**
@@ -5009,6 +5020,10 @@ export type WpGraphQl_Page = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   pageId: Scalars['Int'];
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
+  /** Database id of the parent object */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /** The globally unique identifier of the parent object. */
+  parentId?: Maybe<Scalars['ID']>;
   /**
    * If the current node is a revision, this field exposes the node this is a
    * revision of. Returns null if the node is not a revision of another node.
@@ -8718,7 +8733,7 @@ export type Unnamed_1_Query = { placeholderImage?: Maybe<{ childImageSharp?: May
 export type LayoutQueryVariables = {};
 
 
-export type LayoutQuery = { wpgraphql: { generalSettings?: Maybe<Pick<WpGraphQl_GeneralSettings, 'title' | 'url' | 'description'>>, users?: Maybe<{ nodes?: Maybe<Array<Maybe<(
+export type LayoutQuery = { wpgraphql: { generalSettings?: Maybe<Pick<WpGraphQl_GeneralSettings, 'title' | 'description'>>, users?: Maybe<{ nodes?: Maybe<Array<Maybe<(
         Pick<WpGraphQl_User, 'slug'>
         & { avatar?: Maybe<Pick<WpGraphQl_Avatar, 'url'>> }
       )>>> }>, menus?: Maybe<{ nodes?: Maybe<Array<Maybe<{ menuItems?: Maybe<{ nodes?: Maybe<Array<Maybe<Pick<WpGraphQl_MenuItem, 'label' | 'url'>>>> }> }>>> }> } };
