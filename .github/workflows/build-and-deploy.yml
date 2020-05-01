@@ -29,5 +29,5 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        source: ${{ secrets.SOURCE }}
-        target: ${{ secrets.TARGET }}
+        source: "public/*"
+        target: "web/lolipo.me"
